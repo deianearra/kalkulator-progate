@@ -36,6 +36,7 @@ const operators = document.querySelectorAll(".operator");
 
 operators.forEach((operator) => {
     operator.addEventListener("click", (event) => {
+        console.log(event.target.value);
         inputOperator(event.target.value);
     })
 });
@@ -52,6 +53,7 @@ const inputOperator = (operator) => {
 const equalSign = document.querySelector('.equal-sign');
 
 equalSign.addEventListener('click', () => {
+    console.log('Equal Button Clicked');
     calculate();
     updateScreen(currentNumber);
 });
@@ -72,17 +74,16 @@ const calculate = () => {
             result = parseFloat(prevNumber / currentNumber);
             break
         default:
-            result = "Error";
             break;
     }
+    currentNumber = result;
+    calculationOperator = '';
 };
-
-currentNumber = result;
-calculationOperator = '';
 
 const clearBtn = document.querySelector('.all-clear');
 
 clearBtn.addEventListener('click', () => {
+    console.log('AC Button Clicked');
     clearAll();
     updateScreen(currentNumber);
 });
@@ -96,6 +97,7 @@ clearAll = () => {
 const decimal = document.querySelector('.decimal');
 
 decimal.addEventListener('click', (event) => {
+    console.log(event.target.value);
     inputDecimal(event.target.value);
     updateScreen(currentNumber);
 });
@@ -106,3 +108,10 @@ inputDecimal = (dot) => {
     }
     currentNumber += dot;
 }
+
+
+const percentage = document.querySelector('.percentage');
+
+percentage.addEventListener('click', (event) => {
+    updateScreen(parseInt(currentNumber)/100);
+});
